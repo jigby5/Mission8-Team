@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission8_Team.Models;
 
-public class Task
+public class TaskInstance
 {
     [Key]
     [Required]
@@ -15,7 +15,8 @@ public class Task
     public DateTime DueDate { get; set; }
     
     [Required]
-    public string Quadrant { get; set; }
+    [Range(1, 4)]
+    public int Quadrant { get; set; }
     
     [ForeignKey("CategoryId")]
     public int CategoryId { get; set; }
