@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Mission8_Team.Models.TaskInstance>
+
+@{
+    // only show incomplete tasks 
+    var tasks = Model.Where(t => !t.Completed).ToList();
+
+    // Helper for date display when DueDate is non-nullable DateTime
+    string DueText(DateTime? d) => d.HasValue ? d.Value.ToShortDateString() : "";
+}
+
+<div class="container">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h2 class="mb-0">Stephen Covey Task Quadrants</h2>
+
+    </div>
+
+    <div class="row">
+        <!-- Quadrant I -->
+        <div class="col-md-6">
+            <div class="p-3 border rounded mb-3">
+                <h4 class="mb-0">Quadrant I</h4>
+                <div class="text-muted mb-2">Important / Urgent</div>
+
+                @foreach (var t in tasks.Where(x => x.Quadrant == 1))
+                {
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="fw-semibold">@t.TaskName</div>
+                            <div class="small text-muted">
+                                @if (t.DueDate != DateTime.MinValue)
+                                {
+                                    <span>Due: @DueText(t.DueDate)</span>
+                                }
+                                @if (t.Category != null)
+                                {
+                                    <span class="ms-2">| @t.Category.CategoryName</span>
+                                }
+                            </div>
+
+                            <div class="mt-2">
+                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                                <a class="btn btn-sm btn-success" asp-action="Complete" asp-route-id="@t.TaskId">Complete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (!tasks.Any(x => x.Quadrant == 1))
+                {
+                    <div class="text-muted">No tasks</div>
+                }
+            </div>
+        </div>
+
+        <!-- Quadrant II -->
+        <div class="col-md-6">
+            <div class="p-3 border rounded mb-3">
+                <h4 class="mb-0">Quadrant II</h4>
+                <div class="text-muted mb-2">Important / Not Urgent</div>
+
+                @foreach (var t in tasks.Where(x => x.Quadrant == 2))
+                {
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="fw-semibold">@t.TaskName</div>
+                            <div class="small text-muted">
+                                @if (t.DueDate != DateTime.MinValue)
+                                {
+                                    <span>Due: @DueText(t.DueDate)</span>
+                                }
+                                @if (t.Category != null)
+                                {
+                                    <span class="ms-2">| @t.Category.CategoryName</span>
+                                }
+                            </div>
+
+                            <div class="mt-2">
+                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                                <a class="btn btn-sm btn-success" asp-action="Complete" asp-route-id="@t.TaskId">Complete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (!tasks.Any(x => x.Quadrant == 2))
+                {
+                    <div class="text-muted">No tasks</div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Quadrant III -->
+        <div class="col-md-6">
+            <div class="p-3 border rounded mb-3">
+                <h4 class="mb-0">Quadrant III</h4>
+                <div class="text-muted mb-2">Not Important / Urgent</div>
+
+                @foreach (var t in tasks.Where(x => x.Quadrant == 3))
+                {
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="fw-semibold">@t.TaskName</div>
+                            <div class="small text-muted">
+                                @if (t.DueDate != DateTime.MinValue)
+                                {
+                                    <span>Due: @DueText(t.DueDate)</span>
+                                }
+                                @if (t.Category != null)
+                                {
+                                    <span class="ms-2">| @t.Category.CategoryName</span>
+                                }
+                            </div>
+
+                            <div class="mt-2">
+                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                                <a class="btn btn-sm btn-success" asp-action="Complete" asp-route-id="@t.TaskId">Complete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (!tasks.Any(x => x.Quadrant == 3))
+                {
+                    <div class="text-muted">No tasks</div>
+                }
+            </div>
+        </div>
+
+        <!-- Quadrant IV -->
+        <div class="col-md-6">
+            <div class="p-3 border rounded mb-3">
+                <h4 class="mb-0">Quadrant IV</h4>
+                <div class="text-muted mb-2">Not Important / Not Urgent</div>
+
+                @foreach (var t in tasks.Where(x => x.Quadrant == 4))
+                {
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="fw-semibold">@t.TaskName</div>
+                            <div class="small text-muted">
+                                @if (t.DueDate != DateTime.MinValue)
+                                {
+                                    <span>Due: @DueText(t.DueDate)</span>
+                                }
+                                @if (t.Category != null)
+                                {
+                                    <span class="ms-2">| @t.Category.CategoryName</span>
+                                }
+                            </div>
+
+                            <div class="mt-2">
+                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@t.TaskId">Edit</a>
+                                <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@t.TaskId">Delete</a>
+                                <a class="btn btn-sm btn-success" asp-action="Complete" asp-route-id="@t.TaskId">Complete</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                @if (!tasks.Any(x => x.Quadrant == 4))
+                {
+                    <div class="text-muted">No tasks</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
