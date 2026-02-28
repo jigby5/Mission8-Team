@@ -1,0 +1,17 @@
+# SQLite temporary files (The ones we talked about!)
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+
+# Build Folders
+bin/
+obj/
+
+# IDE Folders
+.idea/
+.vs/
+
+# User-specific files
+*.user
+/Tasks.sqlite-shm
