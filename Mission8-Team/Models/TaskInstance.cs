@@ -12,7 +12,7 @@ public class TaskInstance
     [Required]
     public string TaskName { get; set; }
     
-    public DateTime DueDate { get; set; }
+    public DateTime? DueDate { get; set; }
     
     [Required]
     [Range(1, 4)]
@@ -20,7 +20,7 @@ public class TaskInstance
     
     [ForeignKey("CategoryId")]
     public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public Category? Category { get; set; }
     
     public bool Completed { get; set; }
 }
