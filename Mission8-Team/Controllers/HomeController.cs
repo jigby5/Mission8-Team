@@ -32,6 +32,25 @@ public class HomeController : Controller
     }
 
     [HttpGet]
+public IActionResult Create()
+{
+    ViewBag.Categories = new SelectList(_context.Categories.ToList(), "CategoryId", "CategoryName");
+    return View(new TaskInstance());
+}
+
+[HttpPost]
+public IActionResult Create(TaskInstance task)
+{
+    if (ModelState.IsValid)
+    {
+        _context.Tasks.Add(task);
+        _context.SaveChanges();
+        return RedirectToAction("Quadrants");
+    }
+
+    ViewBag.Categories = new SelectList(_context.Categories.ToList(), "CategoryId", "CategoryName", task.CategoryId);
+    return View(task);
+}
     public IActionResult Edit(int id)
     {
         var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
